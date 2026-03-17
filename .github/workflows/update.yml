@@ -1,0 +1,84 @@
+name: "Update"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */4 * * *'
+
+jobs:
+  updater:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Maximize disk space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 5120
+          remove-dotnet: true
+          remove-android: true
+          remove-docker-images: true
+
+      - uses: actions/checkout@v4
+
+      - name: Settings DoT DNS with systemd-resolved
+        run: |
+         sudo apt update
+         sudo apt install -y bind9-dnsutils sudo --no-install-suggests
+         sudo mkdir -pv /etc/systemd/resolved.conf.d/
+         echo -e "[Resolve]\nDNS=8.8.4.4#dns.google\nFallbackDNS=\nDNSOverTLS=yes\nDNSSEC=yes\nCache=yes\nCacheFromLocalhost=yes\nReadEtcHosts=no" | sudo tee /etc/systemd/resolved.conf.d/google.conf &>/dev/null;
+         echo -e "[Resolve]\nDNS=1.0.0.1#1dot1dot1dot1.cloudflare-dns.com\nFallbackDNS=\nDNSOverTLS=yes\nDNSSEC=yes\nCache=yes\nCacheFromLocalhost=yes\nReadEtcHosts=no" | sudo tee /etc/systemd/resolved.conf.d/cloudflare.conf &>/dev/null;
+         cat /etc/systemd/resolved.conf.d/google.conf
+         echo ""
+         cat /etc/systemd/resolved.conf.d/cloudflare.conf
+         echo ""
+         echo "nameserver 127.0.0.53" | sudo tee /etc/resolv.conf.DNSoverride &>/dev/null;
+         sudo ln -svf /etc/resolv.conf.DNSoverride /etc/resolv.conf
+         cat -n /etc/resolv.conf
+         echo ""
+         cat -n /etc/hosts
+         echo ""
+         sudo systemctl restart systemd-resolved.service
+         sleep 3s
+         nc -z -v 127.0.0.53 53 && echo ""
+
+      - name: Prepare packages
+        run: sudo apt-get install -y bash wget curl zstd zip grepcidr libarchive-tools whois dos2unix moreutils jq ipcalc ripgrep gawk parallel bind9-dnsutils language-pack-ru language-pack-en locales && sudo sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && sudo locale-gen --no-purge en_US.UTF-8
+
+      - shell: bash
+        env:
+          URL_DEB_SING_BOX: https://github.com/SagerNet/sing-box/releases/download/v1.12.13/sing-box_1.12.13_linux_amd64.deb
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo wget -4q -nv -O - ${URL_DEB_SING_BOX} > ./sing-box.deb
+          sudo dpkg -i ./sing-box.deb && sudo rm -fv ./sing-box.deb
+
+      - name: Download list RU suite domain
+        env:
+          LANG: en_US.UTF-8
+          CHARSET: UTF-8
+          NAME_ACCOUNT_GITHUB: you-oops-dev
+        run: |
+          set -euo pipefail
+          set -x
+          curl --max-time 30 --retry-delay 3 --retry 10 -4s -# https://raw.githubusercontent.com/itdoginfo/allow-domains/refs/heads/main/src/Russia-domains-outside.lst https://raw.githubusercontent.com/hxehex/russia-mobile-internet-whitelist/refs/heads/main/whitelist.txt https://raw.githubusercontent.com/v2fly/domain-list-community/refs/heads/master/data/category-media-ru https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Shadowrocket/Yandex/Yandex.list https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Shadowrocket/VK/VK.list https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/ozon | sed 's/ //g' | sed -r '/^\s*$/d' | sed '/!/d' | sed '/!!/d' | sed '/#/d' | sed 's/DOMAIN-SUFFIX,//g' | sed 's/^https\?:\/\///g' | sed '/IP-CIDR/d' | sed '/@/d' | sed 's/full://g' | sed '/:/d' | sed 's/DOMAIN,//g' | sed '/DOMAIN-KEYWORD/d' | sed '/#/d' | sed '/!/d' | sed '/!!/d' | sed '/.ua/d' | sed '/cdn77.org/d' | sort | uniq >> country/ru/domain.txt && sort country/ru/domain.txt | uniq | sed 's/ //g' | sed -r '/^\s*$/d' | sponge country/ru/domain.txt
+
+      - name: Gen srs for sing-box
+        env:
+          LANG: en_US.UTF-8
+          CHARSET: UTF-8
+          NAME_ACCOUNT_GITHUB: you-oops-dev
+        run: |
+          set -euo pipefail
+          set -x
+          find . -name downloader.sh| sort -h | parallel --will-cite -j $(nproc) echo "script execution '{}'"';' bash {.}.sh
+
+      - name: Commit files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update"
+          file_pattern: '*/*.zip */*/*.zip */*.srs */*/*.srs */*.json.zst */*/*.json.zst'
+          commit_options: "--no-verify"
+          repository: .
+          commit_user_name: github-actions[bot]
+          commit_user_email: github-actions[bot]@users.noreply.github.com
+          commit_author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>

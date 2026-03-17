@@ -1,0 +1,5 @@
+.openai.com
+.openai.org
+.openai.com.cdn.cloudflare.net
+.oaistatic.com
+.chatgpt.com

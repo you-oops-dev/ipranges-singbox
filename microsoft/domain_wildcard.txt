@@ -1,0 +1,12 @@
+.windowsupdate.com
+.windows.com
+.msedge.net
+.microsoft.net
+.microsoft.com
+.skype.com
+.sfx.ms
+.akamaiedge.net
+.akamaized.net
+.msn.com
+.live.com
+.msecnd.net
