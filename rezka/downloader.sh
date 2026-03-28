@@ -19,6 +19,12 @@ download_domain() {
 download_ip "${NAME_SERVICE}" > "${HOME_GITHUB}"/"${NAME_SERVICE}"/ipv4.txt
 download_domain "${NAME_SERVICE}" > "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt
 
+echo "hdrezka.tv
+hdrezka.club
+rezkery.com
+rezkify.com" >> "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt
+sort "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt | uniq | sponge "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt
+
 if [[ -f "${HOME_GITHUB}/${NAME_SERVICE}/ipv4.txt" ]] && [[ -f "${HOME_GITHUB}/${NAME_SERVICE}/domain.txt" ]] && [[ -f "${HOME_GITHUB}/${NAME_SERVICE}/domain_wildcard.txt" ]]; then
     jq -n \
         --slurpfile domain_data <(jq -R . "${HOME_GITHUB}/${NAME_SERVICE}/domain.txt") \
