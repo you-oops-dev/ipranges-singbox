@@ -9,6 +9,7 @@
 .emias.info
 .mgfoms.ru
 .mosreg.ru
+.mts.ru
 .sevastopol.ru
 .sev.ru
 .xn--80adxhks
