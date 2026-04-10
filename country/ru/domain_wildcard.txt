@@ -10,6 +10,7 @@
 .mgfoms.ru
 .mosreg.ru
 .mts.ru
+.mtscdn.ru
 .sevastopol.ru
 .sev.ru
 .xn--80adxhks
