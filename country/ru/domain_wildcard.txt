@@ -1,3 +1,4 @@
+.apptracer.ru
 .government.ru
 .gov.ru
 .mos.ru
@@ -7,10 +8,12 @@
 .nalog.ru
 .cbr.ru
 .emias.info
+.mail.ru
 .mgfoms.ru
 .mosreg.ru
 .mts.ru
 .mtscdn.ru
+.max.ru
 .sevastopol.ru
 .sev.ru
 .xn--80adxhks
@@ -28,3 +31,4 @@
 .yastatic.net
 .vk.com
 .vk.ru
+.rustore.ru
