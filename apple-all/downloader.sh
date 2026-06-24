@@ -11,13 +11,18 @@ download_ip() {
     curl --max-time 30 --retry-delay 3 --retry 10 -4s -# https://raw.githubusercontent.com/$NAME_ACCOUNT_GITHUB/ipranges/main/"$1"/ipv4_merged.txt
 }
 
-# From my repository ipranges domain (if any)
+# From my repository domain (if any)
 download_domain() {
-    curl --max-time 30 --retry-delay 3 --retry 10 -4s -# https://raw.githubusercontent.com/$NAME_ACCOUNT_GITHUB/ipranges/main/"$1"/domain.txt
+    curl --max-time 30 --retry-delay 3 --retry 10 -4s -# https://raw.githubusercontent.com/$NAME_ACCOUNT_GITHUB/ipranges-singbox/main/apple/domain.txt
+}
+
+download_domain_wildcard() {
+    curl --max-time 30 --retry-delay 3 --retry 10 -4s -# https://raw.githubusercontent.com/$NAME_ACCOUNT_GITHUB/ipranges-singbox/main/apple/domain_wildcard.txt
 }
 
 download_ip "${NAME_SERVICE}" > "${HOME_GITHUB}"/"${NAME_SERVICE}"/ipv4.txt
-#download_domain "${NAME_SERVICE}" > "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt
+download_domain "${NAME_SERVICE}" > "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt
+download_domain_wildcard "${NAME_SERVICE}" > "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain_wildcard.txt
 
 if [[ -f "${HOME_GITHUB}/${NAME_SERVICE}/ipv4.txt" ]] && [[ -f "${HOME_GITHUB}/${NAME_SERVICE}/domain.txt" ]] && [[ -f "${HOME_GITHUB}/${NAME_SERVICE}/domain_wildcard.txt" ]]; then
     jq -n \
