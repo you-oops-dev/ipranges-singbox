@@ -1,0 +1,16 @@
+account.apple.com
+amp-account.apps.apple.com
+appleid.apple.com
+appleid.cdn-apple.com
+apps.apple.com
+apptrailers.itunes.apple.com
+auth.apps.apple.com
+buy.apps.apple.com
+idmsa.apple.com
+is1-ssl.mzstatic.com
+js-cdn.music.apple.com
+km.support.apple.com
+support.apple.com
+www.apple.com
+xp.apple.com
+xp.apple.comapps.apple.com

@@ -1,0 +1,3 @@
+.apple.com
+.cdn-apple.com
+.mzstatic.com
