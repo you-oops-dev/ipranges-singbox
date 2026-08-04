@@ -19,6 +19,16 @@ download_domain() {
 download_ip "${ISO_COUNTRY_CODE}" > "${HOME_GITHUB}"/country/"${ISO_COUNTRY_CODE}"/ipv4.txt
 download_domain "${ISO_COUNTRY_CODE}" >> "${HOME_GITHUB}"/country/"${ISO_COUNTRY_CODE}"/domain.txt
 
+if [[ -f "${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/gov_ru_tls_domain.txt" ]]; then
+cat ${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/gov_ru_tls_domain.txt >> ${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/domain.txt
+sort ${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/domain.txt | uniq | sponge ${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/domain.txt
+fi
+
+if [[ -f "${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/gov_ru_tls_domain_wildcard.txt" ]]; then
+cat ${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/gov_ru_tls_domain_wildcard.txt >> ${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/domain_wildcard.txt
+sort ${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/domain_wildcard.txt | uniq | sponge sort ${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/domain_wildcard.txt
+fi
+
 if [[ -f "${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/ipv4.txt" ]] && [[ -f "${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/domain.txt" ]] && [[ -f "${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/domain_wildcard.txt" ]]; then
     jq -n \
         --slurpfile domain_data <(jq -R . "${HOME_GITHUB}/country/${ISO_COUNTRY_CODE}/domain.txt") \
