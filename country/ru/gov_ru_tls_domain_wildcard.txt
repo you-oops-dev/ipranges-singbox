@@ -1,8 +1,12 @@
 .abr.ru
+.absolutbank.ru
 .alfabank.ru
 .bspb.ru
+.expobank.ru
 .fedsfm.ru
+.forabank.ru
 .gutabank.ru
+.novikom.ru
 .nspd.gov.ru
 .nspk.ru
 .psbank.ru
@@ -11,5 +15,6 @@
 .rshb.ru
 .sberbank.ru
 .tbank.ru
+.ubrr.ru
 .vtb.ru
 .yabank.yandex.ru
