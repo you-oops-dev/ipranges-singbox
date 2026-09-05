@@ -10,6 +10,7 @@ domrfbank.ru
 expobank.ru
 fedsfm.ru
 forabank.ru
+gazprom.ru
 gutabank.ru
 lanta.ru
 lockobank.ru
@@ -20,6 +21,7 @@ nrb.ru
 nskbl.ru
 nspd.gov.ru
 nspk.ru
+okbank.ru
 psbank.ru
 rosbank.ru
 rosreestr.gov.ru
