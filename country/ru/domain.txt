@@ -125,7 +125,6 @@ rzd.ru
 sakhalin.ru
 samara.ru
 saratov.ru
-sberbank.ru
 sevastopol.ru
 sev.ru
 showip.net
@@ -163,7 +162,6 @@ vologda.ru
 voronezh.ru
 vrn.ru
 vshark.ttk.ru
-vtb.ru
 vyatka.ru
 wf.mail.ru
 widevine-proxy.ott.yandex.ru

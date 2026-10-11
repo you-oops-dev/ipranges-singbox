@@ -32,3 +32,4 @@
 .vk.com
 .vk.ru
 .rustore.ru
+.max.ru
