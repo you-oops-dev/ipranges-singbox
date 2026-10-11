@@ -13,7 +13,7 @@ download_ip() {
 
 # From my repository ipranges domain (if any)
 download_domain() {
-    curl --max-time 30 --retry-delay 3 --retry 10 -4s -# https://raw.githubusercontent.com/hxehex/russia-mobile-internet-whitelist/refs/heads/main/whitelist.txt
+    curl --max-time 30 --retry-delay 3 --retry 10 -4s -# https://raw.githubusercontent.com/hxehex/russia-mobile-internet-whitelist/refs/heads/main/whitelist.txt https://raw.githubusercontent.com/$NAME_ACCOUNT_GITHUB/ipranges/refs/heads/main/max/domain.txt
 }
 
 download_ip "${ISO_COUNTRY_CODE}" > "${HOME_GITHUB}"/country/"${ISO_COUNTRY_CODE}"/ipv4.txt
