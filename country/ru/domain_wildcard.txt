@@ -33,3 +33,4 @@
 .vk.ru
 .rustore.ru
 .max.ru
+.sber.ru

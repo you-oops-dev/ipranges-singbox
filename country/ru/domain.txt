@@ -177,3 +177,4 @@ yandex.net
 yaroslavl.ru
 yastatic.net
 yuzhno-sakhalinsk.ru
+sber.ru

@@ -39,3 +39,4 @@ vtb.ru
 yabank.yandex.ru
 zakupki.gov.ru
 zenit.ru
+sber.ru
