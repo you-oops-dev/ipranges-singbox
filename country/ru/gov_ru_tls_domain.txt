@@ -7,6 +7,7 @@ bspb.ru
 chelindbank.ru
 coalmetbank.ru
 domrfbank.ru
+eirc.spb.ru
 expobank.ru
 fedsfm.ru
 forabank.ru
@@ -32,6 +33,7 @@ sberbank.ru
 sdm.ru
 sinara.ru
 solid.ru
+spb.ru
 tbank.ru
 ubrr.ru
 uralsib.ru

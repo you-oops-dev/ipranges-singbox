@@ -32,6 +32,7 @@
 *.sdm.ru
 *.sinara.ru
 *.solid.ru
+*.spb.ru
 *.tbank.ru
 *.ubrr.ru
 *.uralsib.ru
